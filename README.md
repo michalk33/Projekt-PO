@@ -5,3 +5,8 @@ Gra polega na dotarciu graczami do mety. Plansza jest podzielona na kwadratowe p
 Zrzut ekranu prototypu:
 
 ![](https://i.imgur.com/2YHxI2k.png)
+
+
+Schemat UML:
+
+![](https://i.imgur.com/Xfxkx5A.png)
