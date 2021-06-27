@@ -41,4 +41,8 @@ char ReadChar(std::ifstream* ff);
 void WriteInt(int n, std::ofstream* ff);
 int ReadInt(std::ifstream* ff);
 
+enum weight_types inttowght( int x );
+enum speed_types inttospd( int x );
+enum key_colors inttocol( int x );
+
 #endif
