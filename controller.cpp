@@ -162,7 +162,127 @@ int ReadInt(std::ifstream* ff)
     return z ? n : -n;
 }
 
-void GameController::read_level(){brd = create_new_board( 10, 10, 0 );}
+void GameController::read_level()
+{
+    bool oe = ( level < 0 );
+    int oi = ( level < 0 ) ? -level : level;
+    std::ifstream ff(file_name(oi,oe), std::ios::binary | std::ios::in);
+    int nw, nh, nc, kl, cl, dl, bl, pl, ol, px, py, col, val, wght, spd, px2, py2;
+    bool dgg, psh;
+    nw = ReadInt(&ff);
+    nh = ReadInt(&ff);
+    nc = ReadInt(&ff);
+    brd = new Board( nw, nh, nc );
+    kl = ReadInt(&ff);
+    cl = ReadInt(&ff);
+    dl = ReadInt(&ff);
+    bl = ReadInt(&ff);
+    pl = ReadInt(&ff);
+    ol = ReadInt(&ff);
+    for( int i = 0; i < kl; i++ ){
+        px = ReadInt(&ff);
+        py = ReadInt(&ff);
+        col = ReadInt(&ff);
+        Key* ktmpptr = new Key( col, px, py );
+        brd->keys.push_back( ktmpptr );
+    }
+    for( int i = 0; i < cl; i++ ){
+        px = ReadInt(&ff);
+        py = ReadInt(&ff);
+        val = ReadInt(&ff);
+        Coin* ctmpptr = new Coin( val, px, py );
+        brd->coins.push_back( ctmpptr );
+    }
+    for( int i = 0; i < dl; i++ ){
+        px = ReadInt(&ff);
+        py = ReadInt(&ff);
+        Dirt* dtmpptr = new Dirt( px, py );
+        brd->dirts.push_back( dtmpptr );
+    }
+    for( int i = 0; i < bl; i++ ){
+        px = ReadInt(&ff);
+        py = ReadInt(&ff);
+        wght = ReadInt(&ff);
+        Box* btmpptr = new Box( wght, px, py );
+        brd->boxes.push_back( btmpptr );
+    }
+    for( int i = 0; i < pl; i++ ){
+        px = ReadInt(&ff);
+        py = ReadInt(&ff);
+        wght = ReadInt(&ff);
+        spd = ReadInt(&ff);
+        dgg = ReadBool(&ff);
+        psh = ReadBool(&ff);
+        Player* ptmpptr = new Player( wght, spd, dgg, psh, 3, px, py );
+        brd->players.push_back( ptmpptr );
+    }
+    for( int i = 0; i < ol; i++ ){
+        px = ReadInt(&ff);
+        py = ReadInt(&ff);
+        px2 = ReadInt(&ff);
+        py2 = ReadInt(&ff);
+        wght = ReadInt(&ff);
+        spd = ReadInt(&ff);
+        Opponent* otmpptr = new Opponent( wght, spd, px, py, px2, py2 );
+        brd->opponents.push_back( otmpptr );
+    }
+    int tt, btx, bty;
+    bool vrt;
+    for( int i = 0; i < brd->width; i++ ){
+        for( int j = 0; j < brd->height; j++ ){
+            tt = ReadInt(&ff);
+            switch( tt ){
+            case door:
+                col = ReadInt(&ff);
+                brd->tiles[i][j] = new Door( col );
+                break;
+            case gate:
+                btx = ReadInt(&ff);
+                bty = ReadInt(&ff);
+                vrt = ReadBool(&ff);
+                brd->tiles[i][j] = new Gate( vrt, nullptr, btx, bty );
+                break;
+            case exitt:
+                brd->tiles[i][j] = new Exit();
+                break;
+            case grass:
+                brd->tiles[i][j] = new Grass();
+                break;
+            case wall:
+                brd->tiles[i][j] = new Wall();
+                break;
+            case button_multiple_times:
+                brd->tiles[i][j] = new ButtonMultipleTimes();
+                break;
+            case button_one_time:
+                brd->tiles[i][j] = new ButtonOneTime();
+                break;
+            }
+        }
+    }
+    for( int i = 0; i < brd->width; i++ ){
+        for( int j = 0; j < brd->height; j++ ){
+            if( brd->tiles[i][j]->get_type() == gate ){
+                vrt = brd->tiles[i][j]->get_vert();
+                btx = brd->tiles[i][j]->get_btnx();
+                bty = brd->tiles[i][j]->get_btny();
+                if( brd->tiles[btx][bty]->get_type() == button_one_time ){
+                    ButtonOneTime* tmpptr = new ButtonOneTime();
+                    delete brd->tiles[btx][bty];
+                    brd->tiles[btx][bty] = (Tile*) tmpptr;
+                    delete brd->tiles[i][j];
+                    brd->tiles[i][j] = new Gate( vrt, (Button*) tmpptr, btx, bty );
+                }else{
+                    ButtonMultipleTimes* tmpptr2 = new ButtonMultipleTimes();
+                    delete brd->tiles[btx][bty];
+                    brd->tiles[btx][bty] = (Tile*) tmpptr2;
+                    delete brd->tiles[i][j];
+                    brd->tiles[i][j] = new Gate( vrt, (Button*) tmpptr, btx, bty );
+                }
+            }
+        }
+    }
+}
 
 void GameController::save_level(){
     std::ofstream ff(file_name(-level,true), std::ios::binary | std::ios::trunc | std::ios::out);
