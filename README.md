@@ -10,3 +10,5 @@ Zrzut ekranu prototypu:
 Schemat UML:
 
 ![](https://i.imgur.com/Xfxkx5A.png)
+
+Aby skompilować, należy pobrać archiwum z biblioteką SFML (https://www.sfml-dev.org/download/sfml/2.5.1/) i wypakować w tym samym folderze, w którym są pliki źródłowe.
