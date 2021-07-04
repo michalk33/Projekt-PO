@@ -7,8 +7,8 @@ const int TILE_SIZE = 60;
 const int SLOW_MOVING_TIME_D = 7;
 const int FAST_MOVING_TIME_D = 10;
 const int BOX_MOVING_TIME_D = 10;
-const int MOVING_INITIAL_STATE = 1000;
-const int GATE_OPENING_TIME = 100;
+const int MOVING_INITIAL_STATE = 2000;
+const int GATE_OPENING_TIME = 300;
 const int KEY_SIZE = 30;
 const int WINDOW_W = 1200;
 const int WINDOW_H = 800;
@@ -18,7 +18,9 @@ const int MAX_L = 100;
 const int MIN_L = 15;
 const int MAX_C = 200;
 const int EDITOR_WAITING_TIME = 100;
-const int INJURY_TIME = 100;
+const int INJURY_TIME = 300;
+const int FRAME_TIME_MS = 10;
+const int ITERATION_TIME_MS = 1;
 
 class graphics{
 public:

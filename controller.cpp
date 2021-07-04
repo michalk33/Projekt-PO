@@ -7,8 +7,7 @@ GameController::GameController( sf::Font* font ) : mms( font ), cls( font ), cle
 }
 
 GameController::~GameController(){
-    if( brd ) delete brd;
-    //delete GRPH; ????
+    delete GRPH;
 }
 
 void GameController::run( sf::RenderWindow* dest ){
@@ -183,7 +182,7 @@ void GameController::read_level()
         px = ReadInt(&ff);
         py = ReadInt(&ff);
         col = ReadInt(&ff);
-        Key* ktmpptr = new Key( inttocol(col), px, py );
+        Key* ktmpptr = new Key( (enum key_colors) col, px, py );
         brd->keys.push_back( ktmpptr );
     }
     for( int i = 0; i < cl; i++ ){
@@ -203,7 +202,7 @@ void GameController::read_level()
         px = ReadInt(&ff);
         py = ReadInt(&ff);
         wght = ReadInt(&ff);
-        Box* btmpptr = new Box( inttowght(wght), px, py );
+        Box* btmpptr = new Box( (enum weight_types) wght, px, py );
         brd->boxes.push_back( btmpptr );
     }
     for( int i = 0; i < pl; i++ ){
@@ -213,7 +212,7 @@ void GameController::read_level()
         spd = ReadInt(&ff);
         dgg = ReadBool(&ff);
         psh = ReadBool(&ff);
-        Player* ptmpptr = new Player( inttowght(wght), inttospd(spd), dgg, psh, 3, px, py );
+        Player* ptmpptr = new Player( (enum weight_types) wght, (enum speed_types) spd, dgg, psh, 3, px, py );
         brd->players.push_back( ptmpptr );
     }
     for( int i = 0; i < ol; i++ ){
@@ -223,7 +222,7 @@ void GameController::read_level()
         py2 = ReadInt(&ff);
         wght = ReadInt(&ff);
         spd = ReadInt(&ff);
-        Opponent* otmpptr = new Opponent( inttowght(wght), inttospd(spd), px, py, px2, py2 );
+        Opponent* otmpptr = new Opponent( (enum weight_types) wght, (enum speed_types) spd, px, py, px2, py2 );
         brd->opponents.push_back( otmpptr );
     }
     int tt, btx, bty;
@@ -234,7 +233,7 @@ void GameController::read_level()
             switch( tt ){
             case door:
                 col = ReadInt(&ff);
-                brd->tiles[i][j] = new Door( inttocol(col) );
+                brd->tiles[i][j] = new Door( (enum key_colors) col );
                 break;
             case gate:
                 btx = ReadInt(&ff);
@@ -345,37 +344,4 @@ void GameController::save_level(){
             }
         }
     }
-}
-
-enum weight_types inttowght( int x ){
-    switch( x ){
-    case 0:
-        return heavy;
-    case 1:
-        return light;
-    }
-    return heavy;
-}
-
-enum speed_types inttospd( int x ){
-    switch( x ){
-    case 0:
-        return slow;
-    case 1:
-        return fast;
-    }
-    return slow;
-}
-
-
-enum key_colors inttocol( int x ){
-    switch( x ){
-    case 0:
-        return red;
-    case 1:
-        return green;
-    case 2:
-        return purple;
-    }
-    return red;
 }

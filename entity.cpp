@@ -40,8 +40,10 @@ void Entity::go( Board* brd, int time_d ){
     }
 }
 
-bool Entity::try_moving( enum direction ndr, Board* brd, bool dg, bool cl, bool ps ){
+bool Entity::try_moving( enum direction ndr, Board* brd, bool dg, bool cl, bool ps, Player* pl_ptr ){
     std::pair<int,int> temp = new_coordinates( pos_x, pos_y, ndr );
+    if( !( brd->tiles[temp.first][temp.second]->walkable( pl_ptr ) ) )
+        return false;
     if( brd->tiles[temp.first][temp.second]->get_entity_ptr() != nullptr ){
         enum entity_types ent = brd->tiles[temp.first][temp.second]->get_entity_ptr()->type();
         switch( ent ){
@@ -99,7 +101,7 @@ bool Entity::try_moving( enum direction ndr, Board* brd, bool dg, bool cl, bool 
                     if( brd->boxes[i]->pos_x == temp.first &&
                         brd->boxes[i]->pos_y == temp.second ){
                             std::pair<int,int> temp2 = new_coordinates( temp.first, temp.second, ndr );
-                            if( brd->boxes[i]->get_state() == staying && brd->tiles[temp2.first][temp2.second]->pushable() && brd->boxes[i]->try_moving( ndr, brd, false, false, false ) ){
+                            if( brd->boxes[i]->get_state() == staying && brd->tiles[temp2.first][temp2.second]->pushable() && brd->boxes[i]->try_moving( ndr, brd, false, false, false, nullptr ) ){
                                 start_moving( ndr, brd );
                                 return true;
                             }
@@ -111,7 +113,9 @@ bool Entity::try_moving( enum direction ndr, Board* brd, bool dg, bool cl, bool 
         case player:
             if( this->type() == opponent ){
                 for( int i = 0; i < brd->players.size(); i++ ){
-                    if( brd->players[i]->pos_x == temp.first && brd->players[i]->pos_x == temp.second ){
+                    std::pair<int,int> temppl = new_coordinates( brd->players[i]->pos_x, brd->players[i]->pos_y, brd->players[i]->dir );
+                    if( ( brd->players[i]->pos_x == temp.first && brd->players[i]->pos_y == temp.second ) ||
+                        ( temppl.first == temp.first && temppl.second == temp.second && brd->players[i]->get_state() == moving ) ){
                         if( brd->players[i]->player_state == normal ){
                             brd->players[i]->player_state = injured;
                             brd->players[i]->player_state_time = INJURY_TIME;
@@ -164,32 +168,32 @@ void Opponent::run( Board* brd, bool focus ){
                 if( pos_y == pos1_y )
                     to_first = false;
                 else if( pos_y > pos1_y )
-                    to_first = try_moving( up, brd, false, false, false );
+                    to_first = try_moving( up, brd, false, false, false, nullptr );
                 else
-                    to_first = try_moving( down, brd, false, false, false );
+                    to_first = try_moving( down, brd, false, false, false, nullptr );
             }else{
                 if( pos_x == pos1_x )
                     to_first = false;
                 else if( pos_x > pos1_x )
-                    to_first = try_moving( left, brd, false, false, false );
+                    to_first = try_moving( left, brd, false, false, false, nullptr );
                 else
-                    to_first = try_moving( right, brd, false, false, false );
+                    to_first = try_moving( right, brd, false, false, false, nullptr );
             }
         }else{
             if( pos_x == pos2_x ){
                 if( pos_y == pos2_y )
                     to_first = true;
                 else if( pos_y > pos2_y )
-                    to_first = !try_moving( up, brd, false, false, false );
+                    to_first = !try_moving( up, brd, false, false, false, nullptr );
                 else
-                    to_first = !try_moving( down, brd, false, false, false );
+                    to_first = !try_moving( down, brd, false, false, false, nullptr );
             }else{
                 if( pos_x == pos2_x )
                     to_first = true;
                 else if( pos_x > pos2_x )
-                    to_first = !try_moving( left, brd, false, false, false );
+                    to_first = !try_moving( left, brd, false, false, false, nullptr );
                 else
-                    to_first = !try_moving( right, brd, false, false, false );
+                    to_first = !try_moving( right, brd, false, false, false, nullptr );
             }
         }
         break;
@@ -209,9 +213,7 @@ void Player::run( Board* brd, bool focus ){
         if( focus ){
             enum direction tmp = pressed_dir();
             if( tmp != nothing ){
-                std::pair<int,int> temp = new_coordinates( pos_x, pos_y, tmp );
-                if( brd->tiles[temp.first][temp.second]->walkable( this ) )
-                    try_moving( tmp, brd, digging, true, pushing );
+                try_moving( tmp, brd, digging, true, pushing, this );
             }
         }
         break;

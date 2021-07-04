@@ -6,6 +6,7 @@
 #include "board.hpp"
 #include "button.hpp"
 #include "game_state.hpp"
+#include "editor.hpp"
 
 class GameController{
 public:
@@ -40,9 +41,5 @@ void WriteChar(char c, std::ofstream* ff);
 char ReadChar(std::ifstream* ff);
 void WriteInt(int n, std::ofstream* ff);
 int ReadInt(std::ifstream* ff);
-
-enum weight_types inttowght( int x );
-enum speed_types inttospd( int x );
-enum key_colors inttocol( int x );
 
 #endif

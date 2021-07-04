@@ -4,8 +4,6 @@
 #include <utility>
 #include <string>
 
-#include <iostream>
-
 std::string tostring( int x );
 
 enum direction{

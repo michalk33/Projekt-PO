@@ -9,7 +9,7 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/Labirynt" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -18,7 +18,7 @@
 			<Target title="Release">
 				<Option output="bin/Release/Labirynt" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -68,10 +68,14 @@
 		<Unit filename="board.hpp" />
 		<Unit filename="button.cpp" />
 		<Unit filename="button.hpp" />
+		<Unit filename="button_onclicks.cpp" />
+		<Unit filename="button_onclicks.hpp" />
 		<Unit filename="consts.cpp" />
 		<Unit filename="consts.hpp" />
 		<Unit filename="controller.cpp" />
 		<Unit filename="controller.hpp" />
+		<Unit filename="editor.cpp" />
+		<Unit filename="editor.hpp" />
 		<Unit filename="entity.cpp" />
 		<Unit filename="entity.hpp" />
 		<Unit filename="enums.cpp" />
@@ -79,6 +83,8 @@
 		<Unit filename="game_state.cpp" />
 		<Unit filename="game_state.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="main_controller.cpp" />
+		<Unit filename="main_controller.hpp" />
 		<Unit filename="tile.cpp" />
 		<Unit filename="tile.hpp" />
 		<Extensions>

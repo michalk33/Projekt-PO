@@ -6,6 +6,7 @@
 #include "consts.hpp"
 
 class Board;
+class Player;
 
 class Entity{
 protected:
@@ -13,7 +14,7 @@ protected:
     enum direction dir;
     enum entity_states state;
     void go( Board* brd, int time_d );
-    bool try_moving( enum direction ndr, Board* brd, bool dg, bool cl, bool ps );
+    bool try_moving( enum direction ndr, Board* brd, bool dg, bool cl, bool ps, Player* pl_ptr );
     void start_moving( enum direction ndr, Board* brd );
     float dist( int tile_size );
 public:

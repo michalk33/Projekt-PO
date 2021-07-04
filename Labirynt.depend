@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
-1624792363 source:e:\projekt po\labirynt\main.cpp
+1625404236 source:e:\projekt po\labirynt\main.cpp
 	<SFML/Window.hpp>
-	"controller.hpp"
+	"main_controller.hpp"
 
 1525815618 e:\projekt po\labirynt\sfml-2.5.1\include\sfml\network.hpp
 	<SFML/System.hpp>
@@ -293,19 +293,18 @@
 	"consts.hpp"
 	<SFML/Window/Keyboard.hpp>
 
-1624811283 e:\projekt po\labirynt\enums.hpp
+1625271392 e:\projekt po\labirynt\enums.hpp
 	<utility>
 	<string>
-	<iostream>
 
-1624812005 e:\projekt po\labirynt\consts.hpp
+1625270541 e:\projekt po\labirynt\consts.hpp
 	<SFML/Graphics.hpp>
 
-1624813699 source:e:\projekt po\labirynt\entity.cpp
+1625407183 source:e:\projekt po\labirynt\entity.cpp
 	"entity.hpp"
 	"board.hpp"
 
-1624816013 e:\projekt po\labirynt\entity.hpp
+1625406243 e:\projekt po\labirynt\entity.hpp
 	<SFML/Graphics.hpp>
 	"enums.hpp"
 	"consts.hpp"
@@ -530,11 +529,10 @@
 1624795701 source:e:\projekt po\labirynt\consts.cpp
 	"consts.hpp"
 
-1624814889 source:e:\projekt po\labirynt\game_state.cpp
-	"game_state.hpp"
-	"controller.hpp"
+1625403609 source:e:\projekt po\labirynt\game_state.cpp
+	"button_onclicks.hpp"
 
-1624811267 e:\projekt po\labirynt\game_state.hpp
+1625403500 e:\projekt po\labirynt\game_state.hpp
 	"button.hpp"
 	"enums.hpp"
 	"consts.hpp"
@@ -549,12 +547,32 @@
 	"controller.hpp"
 	<SFML/Window/Mouse.hpp>
 
-1624817635 e:\projekt po\labirynt\controller.hpp
+1625403734 e:\projekt po\labirynt\controller.hpp
 	<fstream>
 	"board.hpp"
 	"button.hpp"
 	"game_state.hpp"
+	"editor.hpp"
 
-1624814447 source:e:\projekt po\labirynt\controller.cpp
+1625271369 source:e:\projekt po\labirynt\controller.cpp
 	"controller.hpp"
+
+1625269649 e:\projekt po\labirynt\main_controller.hpp
+	"controller.hpp"
+
+1625269973 source:e:\projekt po\labirynt\main_controller.cpp
+	"main_controller.hpp"
+
+1625403175 source:e:\projekt po\labirynt\button_onclicks.cpp
+	"button_onclicks.hpp"
+
+1625403311 e:\projekt po\labirynt\button_onclicks.hpp
+	"controller.hpp"
+
+1625403543 e:\projekt po\labirynt\editor.hpp
+	"game_state.hpp"
+
+1625404892 source:e:\projekt po\labirynt\editor.cpp
+	"editor.hpp"
+	"button_onclicks.hpp"
 
