@@ -64,29 +64,29 @@
 			<Add library="SFML-2.5.1/lib/libvorbisfile.a" />
 			<Add directory="SFML-2.5.1/lib" />
 		</Linker>
-		<Unit filename="board.cpp" />
-		<Unit filename="board.hpp" />
-		<Unit filename="button.cpp" />
-		<Unit filename="button.hpp" />
-		<Unit filename="button_onclicks.cpp" />
-		<Unit filename="button_onclicks.hpp" />
-		<Unit filename="consts.cpp" />
-		<Unit filename="consts.hpp" />
-		<Unit filename="controller.cpp" />
-		<Unit filename="controller.hpp" />
-		<Unit filename="editor.cpp" />
-		<Unit filename="editor.hpp" />
-		<Unit filename="entity.cpp" />
-		<Unit filename="entity.hpp" />
-		<Unit filename="enums.cpp" />
-		<Unit filename="enums.hpp" />
-		<Unit filename="game_state.cpp" />
-		<Unit filename="game_state.hpp" />
-		<Unit filename="main.cpp" />
-		<Unit filename="main_controller.cpp" />
-		<Unit filename="main_controller.hpp" />
-		<Unit filename="tile.cpp" />
-		<Unit filename="tile.hpp" />
+		<Unit filename="src/board.cpp" />
+		<Unit filename="src/board.hpp" />
+		<Unit filename="src/button.cpp" />
+		<Unit filename="src/button.hpp" />
+		<Unit filename="src/button_onclicks.cpp" />
+		<Unit filename="src/button_onclicks.hpp" />
+		<Unit filename="src/consts.cpp" />
+		<Unit filename="src/consts.hpp" />
+		<Unit filename="src/controller.cpp" />
+		<Unit filename="src/controller.hpp" />
+		<Unit filename="src/editor.cpp" />
+		<Unit filename="src/editor.hpp" />
+		<Unit filename="src/entity.cpp" />
+		<Unit filename="src/entity.hpp" />
+		<Unit filename="src/enums.cpp" />
+		<Unit filename="src/enums.hpp" />
+		<Unit filename="src/game_state.cpp" />
+		<Unit filename="src/game_state.hpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/main_controller.cpp" />
+		<Unit filename="src/main_controller.hpp" />
+		<Unit filename="src/tile.cpp" />
+		<Unit filename="src/tile.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
