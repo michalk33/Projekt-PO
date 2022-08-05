@@ -12,6 +12,6 @@ Schemat UML:
 ![](https://i.imgur.com/Xfxkx5A.png)
 
 Aby skompilować, należy pobrać archiwum z biblioteką SFML (https://www.sfml-dev.org/download/sfml/2.5.1/) i wypakować w tym samym folderze, w którym są pliki źródłowe.
-Można użyć komend:    
+Można użyć komend (wówczas należy wypakować archiwum do folderu głównego projektu):    
 `g++ -c src/*.cpp -ISFML-2.5.1/include -std=c++17`    
 `g++ *.o -o main -LSFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system`    
